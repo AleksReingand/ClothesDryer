@@ -2,20 +2,24 @@ package clothes_dryer;
 
 public class ClothesDryer
 {
-    public void start(Program program)
+        private Message messager = new ConsoleMessageImpl();
+        private DoorHandler doorHandler = new DoorHandlerImpl();
+        private Sounder beep = new BeepSounderImpl();
+        private Sounder melody = new MelodySounderImpl();
+
+        public void start(ProgramEnum program)
     {
-        // msg about program
-        // msg about start
-        // close door
-        // sound
+        messager.message("Choosing the " + program.getProgram() + " program");
+        doorHandler.isOpen();
+        beep.sound();
         startProgram(program);
-        // msg about finished
-        // sound
-        // open door
+        messager.message("Done");
+        melody.sound();
+        doorHandler.isOpen();
     }
 
-    private void startProgram(Program program)
+    private void startProgram(ProgramEnum programEnum)
     {
-        System.out.println("Started " + program.local() + " working time is " + program.hours() + "hours");
+        System.out.println("Started program: " + programEnum.getProgram() + ", the working time is " + programEnum.getHour() + " hours");
     }
 }
